@@ -9,7 +9,7 @@ class HouseController extends Controller
 {
     public function index()
     {
-        $houses = House::all();
+        $houses = House::paginate(12);
         return view('layouts.partials.index', compact('houses'));
     }
 
@@ -40,14 +40,13 @@ class HouseController extends Controller
             'email.email' => 'The email must be a valid email address and must contain @ and .',
         ]);
 
-
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
+        $validatedData = $request->all();
         $validatedData['image'] = $imageName;
         House::create($validatedData);
 
-        // Reindirizza alla rotta dell'index
         return redirect()->route('houses.index')->with('success', 'House created successfully.');
     }
 
@@ -59,11 +58,11 @@ class HouseController extends Controller
     public function update(Request $request, House $house)
     {
         $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
             'price' => 'required|numeric',
-            'address' => 'required',
-            'image' => 'image',
+            'address' => 'required|string|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image')) {
