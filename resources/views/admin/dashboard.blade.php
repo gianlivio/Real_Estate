@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -15,6 +15,10 @@
                         @endif
 
                         {{ __('You are logged in!') }}
+
+                        <div class="mt-4">
+                            <a href="{{ route('houses.index') }}" class="btn btn-primary">Manage Houses</a>
+                        </div>
                     </div>
                 </div>
             </div>
