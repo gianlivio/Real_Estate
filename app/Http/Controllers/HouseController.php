@@ -9,13 +9,19 @@ class HouseController extends Controller
 {
     public function index()
     {
-        $houses = House::all();
+        $houses = House::paginate(12);
         return view('layouts.partials.index', compact('houses'));
     }
 
     public function create()
     {
         return view('layouts.partials.create');
+    }
+
+    public function show($id)
+    {
+        $house = House::findOrFail($id);
+        return view('layouts.partials.show', compact('house'));
     }
 
     public function store(Request $request)

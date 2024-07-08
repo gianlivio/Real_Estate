@@ -30,6 +30,7 @@ Route::middleware('auth')
     ->name('admin.') // inizio di ogni nome delle rotte del gruppo
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/houses/{id}', [HouseController::class, 'show'])->name('houses.show');
     });
 
 require __DIR__ . '/auth.php';
