@@ -27,8 +27,5 @@
             </div>
         @endforeach
     </div>
-    <div class="d-flex justify-content-center mt-4">
-        {{ $houses->links() }}
-    </div>
 </div>
 @endsection

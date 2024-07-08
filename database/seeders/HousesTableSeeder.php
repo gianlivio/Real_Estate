@@ -11,6 +11,7 @@ class HousesTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
+        $images = ['house1.jpg', 'house2.jpg', 'house3.jpg', 'house4.jpg'];
 
         for ($i = 0; $i < 50; $i++) {
             House::create([
@@ -18,7 +19,7 @@ class HousesTableSeeder extends Seeder
                 'description' => $faker->paragraph,
                 'price' => $faker->randomFloat(2, 10000, 1000000),
                 'address' => $faker->address,
-                'image' => 'example.jpg', 
+                'image' => $faker->randomElement($images), 
             ]);
         }
     }

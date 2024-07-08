@@ -9,7 +9,7 @@ class HouseController extends Controller
 {
     public function index()
     {
-        $houses = House::paginate(12);
+        $houses = House::all();
         return view('layouts.partials.index', compact('houses'));
     }
 
